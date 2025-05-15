@@ -1,6 +1,7 @@
 .ScoreTable {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   font-size: 0.9rem;
   width: 80%;
   background-color: white;
@@ -17,4 +18,13 @@
 .ScoreTable-section {
   vertical-align: top;
   width: 100%;
+}
+
+.gameover-title{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  color: #3f51b5;
+  border-bottom: none;
 }

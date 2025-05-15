@@ -7,6 +7,11 @@ const NUM_DICE = 5;
 const NUM_ROLLS = 3;
 
 class Game extends Component {
+
+  static defaultProps = {
+    maxRound: 3,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -15,6 +20,8 @@ class Game extends Component {
       rollsLeft: NUM_ROLLS,
       rolling:false,
       totalScore: 0,
+      round:1,
+      gameover:false,
       scores: {
         ones: undefined,
         twos: undefined,
@@ -81,7 +88,9 @@ class Game extends Component {
       scores: { ...st.scores, [rulename]: ruleFn(this.state.dice) },
       rollsLeft: NUM_ROLLS,
       locked: Array(NUM_DICE).fill(false),
-      totalScore: st.totalScore + ruleFn(this.state.dice)
+      totalScore: st.totalScore + ruleFn(this.state.dice),
+      round: st.round + 1,
+      gameover: st.round >= this.props.maxRound,
     }));
     this.animateRoll();
   }
@@ -97,12 +106,11 @@ class Game extends Component {
   }
 
   render() {
-    const { locked, rollsLeft, rolling, dice, scores } = this.state;
-    return (
+    const { locked, rollsLeft, rolling, dice, scores, gameover } = this.state;
+    return(
       <div className='Game'>
         <header className='Game-header'>
           <h1 className='App-title'>Yahtzee!</h1>
-
           <section className='Game-dice-section'>
             <Dice
               dice={dice}
@@ -114,7 +122,7 @@ class Game extends Component {
             <div className='Game-button-wrapper'>
               <button
                 className='Game-reroll'
-                disabled={locked.every(x => x)||rollsLeft===0||rolling}
+                disabled={locked.every(x => x)||rollsLeft===0||rolling||gameover}
                 onClick={this.animateRoll}
               >
                 {rolling?"Rolling":this.displayRollInfo()}
@@ -126,10 +134,11 @@ class Game extends Component {
           doScore={this.doScore} 
           scores={scores} 
           totalScore ={this.state.totalScore}
-          rolling={rolling} />
+          rolling={rolling}
+          gameover={gameover} />
       </div>
-    );
-  }
+    )
+  };
 }
 
 export default Game;
