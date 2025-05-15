@@ -14,6 +14,7 @@ class Game extends Component {
       locked: Array(NUM_DICE).fill(false),
       rollsLeft: NUM_ROLLS,
       rolling:false,
+      totalScore: 0,
       scores: {
         ones: undefined,
         twos: undefined,
@@ -36,6 +37,7 @@ class Game extends Component {
     this.animateRoll = this.animateRoll.bind(this);
     this.displayRollInfo = this.displayRollInfo.bind(this)
   }
+
 
   componentDidMount(){
     this.animateRoll()
@@ -78,7 +80,8 @@ class Game extends Component {
     this.setState(st => ({
       scores: { ...st.scores, [rulename]: ruleFn(this.state.dice) },
       rollsLeft: NUM_ROLLS,
-      locked: Array(NUM_DICE).fill(false)
+      locked: Array(NUM_DICE).fill(false),
+      totalScore: st.totalScore + ruleFn(this.state.dice)
     }));
     this.animateRoll();
   }
@@ -119,7 +122,7 @@ class Game extends Component {
             </div>
           </section>
         </header>
-        <ScoreTable doScore={this.doScore} scores={scores} />
+        <ScoreTable doScore={this.doScore} scores={scores} totalScore ={this.state.totalScore}/>
       </div>
     );
   }
