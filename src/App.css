@@ -1,8 +1,9 @@
 .App {
-  text-align: center;
-  display: flex;
+  display: flex; 
   justify-content: center;
   align-items: center;
+  text-align: center;
+  width: 100%;
 }
 
 .App-title {
@@ -12,5 +13,5 @@
   font-weight: 100;
   display: inline-block;
   font-size: 3.5rem;
-  width: 50%;
+  width: 100%;
 }
