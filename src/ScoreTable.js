@@ -9,7 +9,7 @@ class ScoreTable extends Component {
   render() {
     const { scores, doScore, totalScore, rolling, gameover} = this.props;
 
-    if (gameover) {
+    if (!gameover) {
       return (
         <div className="ScoreTable">
           <section className="ScoreTable-sect ion">
@@ -50,7 +50,7 @@ class ScoreTable extends Component {
           <section className="ScoreTable-section ScoreTable-section-lower">
             <h2 className='gameover-title'>¡Thanks for playing!</h2>
             <h2 className='gameover-title'>FINAL SCORE: {totalScore} </h2>
-            <button className='Game-reroll'>¡Try Again!</button>
+            {/* <button className='Game-reroll'>¡Try Again!</button> */}
           </section>
         </div>
       )

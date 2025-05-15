@@ -9,7 +9,7 @@ const NUM_ROLLS = 3;
 class Game extends Component {
 
   static defaultProps = {
-    maxRound: 3,
+    maxRound: 13,
   }
 
   constructor(props) {
