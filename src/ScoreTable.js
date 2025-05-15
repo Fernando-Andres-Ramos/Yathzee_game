@@ -6,8 +6,17 @@ import { ones, twos, threes, fours, fives, sixes, threeOfKind, fourOfKind, fullH
 
 class ScoreTable extends Component {
 
+  constructor(props) {
+    super(props);
+    this.handleReset = this.handleReset.bind(this);
+  }
+
+  handleReset = () => {
+    this.props.restartGame();
+  }
+
   render() {
-    const { scores, doScore, totalScore, rolling, gameover} = this.props;
+    const { scores, doScore, totalScore, rolling, gameover, round, maxRound} = this.props;
 
     if (!gameover) {
       return (
@@ -39,7 +48,8 @@ class ScoreTable extends Component {
               </tbody>
             </table>
           </section>
-          <h2>TOTAL SCORE: {totalScore} </h2>
+          <h3>Round:{`${round}/${maxRound}`}</h3>
+          <h2>TOTAL SCORE: {totalScore}  </h2>
         </div>
       )
     }
@@ -50,7 +60,7 @@ class ScoreTable extends Component {
           <section className="ScoreTable-section ScoreTable-section-lower">
             <h2 className='gameover-title'>¡Thanks for playing!</h2>
             <h2 className='gameover-title'>FINAL SCORE: {totalScore} </h2>
-            {/* <button className='Game-reroll'>¡Try Again!</button> */}
+            <button onClick={this.handleReset} className='Game-reroll'>¡Try Again!</button>
           </section>
         </div>
       )

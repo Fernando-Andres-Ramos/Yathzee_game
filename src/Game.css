@@ -16,6 +16,12 @@ h2 {
   display: inline-block;
   margin: 1rem 0;
 }
+
+h3{
+  margin:0;
+  font-weight: 100;
+  padding: 10px;
+}
 .Game-dice-section {
   width: 100%;
   display: flex;

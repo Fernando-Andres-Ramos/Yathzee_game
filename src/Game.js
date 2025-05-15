@@ -10,11 +10,7 @@ class Game extends Component {
 
   static defaultProps = {
     maxRound: 13,
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
+    defaultSettings:{
       dice: Array.from({ length: NUM_DICE }),
       locked: Array(NUM_DICE).fill(false),
       rollsLeft: NUM_ROLLS,
@@ -37,12 +33,24 @@ class Game extends Component {
         yahtzee: undefined,
         chance: undefined
       }
-    };
+    }
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {...this.props.defaultSettings};
     this.roll = this.roll.bind(this);
     this.doScore = this.doScore.bind(this); 
     this.toggleLocked = this.toggleLocked.bind(this);
     this.animateRoll = this.animateRoll.bind(this);
     this.displayRollInfo = this.displayRollInfo.bind(this);
+    this.restartGame = this.restartGame.bind(this);
+  }
+
+  restartGame(){
+    this.setState({
+      ...this.props.defaultSettings,
+    });
   }
 
 
@@ -106,7 +114,7 @@ class Game extends Component {
   }
 
   render() {
-    const { locked, rollsLeft, rolling, dice, scores, gameover } = this.state;
+    const { locked, rollsLeft, rolling, dice, scores, gameover, round} = this.state;
     return(
       <div className='Game'>
         <header className='Game-header'>
@@ -135,7 +143,10 @@ class Game extends Component {
           scores={scores} 
           totalScore ={this.state.totalScore}
           rolling={rolling}
-          gameover={gameover} />
+          gameover={gameover} 
+          restartGame={this.restartGame}
+          round={round}
+          maxRound={this.props.maxRound}/>
       </div>
     )
   };
