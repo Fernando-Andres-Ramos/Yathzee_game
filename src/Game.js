@@ -122,7 +122,11 @@ class Game extends Component {
             </div>
           </section>
         </header>
-        <ScoreTable doScore={this.doScore} scores={scores} totalScore ={this.state.totalScore}/>
+        <ScoreTable 
+          doScore={this.doScore} 
+          scores={scores} 
+          totalScore ={this.state.totalScore}
+          rolling={rolling} />
       </div>
     );
   }
